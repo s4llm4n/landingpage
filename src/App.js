@@ -5,6 +5,8 @@ import IconUser from "./assets/user.png";
 import IconServer from "./assets/Server.png";
 import Ilustration2 from "./assets/Illustration_2.png";
 import Check from "./assets/check.png";
+import IconFree from "./assets/Huge_Global.png";
+import CheckSucces from "./assets/check-success.png";
 
 function App() {
   const menus = ["About", "Features", "Pricing", "Testimonial", "Help"];
@@ -26,7 +28,45 @@ function App() {
     },
   ];
 
-  const features = ["Powerfull online protection.","Internet without borders.","Supercharged VPN.","No specific time limits."]
+  const features = [
+    "Powerfull online protection.",
+    "Internet without borders.",
+    "Supercharged VPN.",
+    "No specific time limits."
+  ];
+
+  const plans = [
+    {
+      title: 'Free Plan',
+      features:["Unlimited Bandwith", 
+                "Encrypted Connection", 
+                "No Traffic Logs", 
+                "Works on All Devices"
+              ],
+              price:"Free",
+    },
+    {
+      title: 'Standard Plan',
+      features:["Unlimited Bandwith", 
+                "Encrypted Connection", 
+                "No Traffic Logs", 
+                "Works on All Devices",
+                "Connect Anywhere"
+              ],
+              price:"$9 / mo",
+    },
+    {
+      title: 'Premium Plan',
+      features:["Unlimited Bandwith", 
+                "Encrypted Connection", 
+                "No Traffic Logs", 
+                "Works on All Devices",
+                "Connect Anywhere",
+                "Connect Anywhere"
+              ],
+              price:"$12 / mo",
+    },
+  ];
 
   return (
     <div className="bg-white">
@@ -86,11 +126,13 @@ function App() {
           );
           })}
         </div>
-        <div className="grid grid-cols-2 py-24">
+        <div className="grid grid-cols-2 py-24 items-center">
           <img src={Ilustration2} alt={"features-landingpage-vpn"} />
-          <div>
-            <div>We Provide Many Features You Can Use</div>
-            <div>
+          <div className="px-16 space-y-4">
+            <div className="font-medium text-3xl">
+              We Provide Many Features You Can Use
+            </div>
+            <div className="text-sm font-normal">
               You can explore the features that we provide with fun and have 
               their own functions each feature.
             </div>
@@ -102,15 +144,71 @@ function App() {
                     alt="features-check-landingpage"
                     className="w-6 h-6"
                   />
-                  <div>
-                    {val}
-                  </div>
+                  <div className="text-xs">{val}</div>
                 </div>
             );
             })}
           </div>
         </div>
+        <div>
+          <div>Chose Your Plan</div>
+          <div>
+            Let's choose the package that is best for you and explore it happily
+            and cheerfully.
+          </div>
+          <div className="grid grid-cols-3 space-x-6">
+            {plans.map((val, index) => {
+                return (
+                  <CardPlan 
+                    key={index} 
+                    {...val} 
+                    isSelect={index+1 === plans.length} 
+                  />
+                );
+              })}
+          </div>
+        </div>
       </main>
+    </div>
+  );
+}
+
+function CardPlan({ title, price, features }) {
+  return (
+    <div 
+        className={` rounded-md flex flex-col justify-between items-center pt-16 pb-8 border ${
+          isSelect ? "border-red-500" : "border-gray-300"
+        }`}
+    >
+      <div className="spce-y-5 flex flex-col justify-center items-center">
+      <img src={IconFree} alt="" className="w-24" />
+      <h3>{title}</h3>
+      <div className="space-y-2">
+        {features.map((val, index) => {
+          return (
+            <div 
+              key={index} 
+              className="flex flex-row mr-2 items-center space-x-2"
+            >
+              <img 
+                src={CheckSucces} 
+                alt="check-success" 
+                className="w-3 h-2"
+              />
+              <div>
+                {val} <div />
+              </div>
+            </div>
+          );
+        })}
+        </div>
+      </div>
+      <div className="mt-8">
+        <div className="text-center mb-3">{price}</div>
+        <button className={`border rounded-full py-1 px-10 border-red-500 text-red-500 ${isSelect?' bg-red-500':'bg-white'}`}>
+          Select
+        </button>
+      </div>
     </div>
   );
 }
