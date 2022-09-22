@@ -150,7 +150,7 @@ function App() {
             })}
           </div>
         </div>
-        <div>
+        <div className="bg-gray-70">
           <div>Chose Your Plan</div>
           <div>
             Let's choose the package that is best for you and explore it happily
@@ -162,7 +162,7 @@ function App() {
                   <CardPlan 
                     key={index} 
                     {...val} 
-                    isSelect={index+1 === plans.length} 
+                    isSelect={index + 1 === plans.length} 
                   />
                 );
               })}
